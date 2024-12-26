@@ -5,7 +5,7 @@ import com.bergamascodev.dto.RegistroFormularioDto;
 import com.bergamascodev.entity.Formulario;
 import com.bergamascodev.entity.Pergunta;
 import com.bergamascodev.entity.RegistroFormulario;
-import com.bergamascodev.enums.MensagensErroEnum;
+import com.bergamascodev.enums.MensagemErroEnum;
 import com.bergamascodev.exception.BergamascoException;
 import com.bergamascodev.repository.FormularioRepository;
 import com.bergamascodev.repository.PerguntaRepository;
@@ -45,15 +45,15 @@ public class RegistroFormularioService {
             registroFormularioRepository.saveAndFlush(registroFormulario);
             return registroFormularioConverter.toDto(registroFormulario);
         } catch (Exception e) {
-            throw gerarRegistroException(MensagensErroEnum.REGISTRO_INVALIDO);
+            throw gerarRegistroException(MensagemErroEnum.REGISTRO_INVALIDO);
         }
     }
 
-    private BergamascoException gerarRegistroException(MensagensErroEnum mensagensErroEnum) {
+    private BergamascoException gerarRegistroException(MensagemErroEnum mensagensErroEnum) {
         return new BergamascoException(mensagensErroEnum.getCodigo(), mensagensErroEnum.getMensagem());
     }
 
-    private BergamascoException gerarRegistroException(MensagensErroEnum mensagensErroEnum, ResponseEnum responseStatus) {
+    private BergamascoException gerarRegistroException(MensagemErroEnum mensagensErroEnum, ResponseEnum responseStatus) {
         return new BergamascoException(mensagensErroEnum.getCodigo(), mensagensErroEnum.getMensagem(), responseStatus);
     }
 }

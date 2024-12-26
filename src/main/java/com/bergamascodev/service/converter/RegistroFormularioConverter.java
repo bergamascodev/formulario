@@ -5,7 +5,7 @@ import com.bergamascodev.dto.RegistroFormularioDto;
 import com.bergamascodev.entity.Formulario;
 import com.bergamascodev.entity.Pergunta;
 import com.bergamascodev.entity.RegistroFormulario;
-import com.bergamascodev.enums.MensagensErroEnum;
+import com.bergamascodev.enums.MensagemErroEnum;
 import com.bergamascodev.exception.BergamascoException;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -51,14 +51,14 @@ public class RegistroFormularioConverter implements Converter<RegistroFormulario
 
     private Formulario getFormulario(RegistroFormularioDto registroFormularioDto) {
         if(registroFormularioDto.getIdFormulario() == null) {
-            throw new BergamascoException(MensagensErroEnum.FORMULARIO_INVALIDO.getCodigo(), MensagensErroEnum.FORMULARIO_INVALIDO.getMensagem());
+            throw new BergamascoException(MensagemErroEnum.FORMULARIO_INVALIDO.getCodigo(), MensagemErroEnum.FORMULARIO_INVALIDO.getMensagem());
         }
         return Formulario.builder().id(registroFormularioDto.getIdFormulario()).build();
     }
 
     private Pergunta getPergunta(RegistroFormularioDto registroFormularioDto) {
         if(registroFormularioDto.getIdPergunta() == null) {
-            throw new BergamascoException(MensagensErroEnum.PERGUNTA_INVALIDA.getCodigo(), MensagensErroEnum.PERGUNTA_INVALIDA.getMensagem());
+            throw new BergamascoException(MensagemErroEnum.PERGUNTA_INVALIDA.getCodigo(), MensagemErroEnum.PERGUNTA_INVALIDA.getMensagem());
         }
         return Pergunta.builder().id(registroFormularioDto.getIdPergunta()).build();
     }

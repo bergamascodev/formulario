@@ -5,7 +5,7 @@ import com.bergamascodev.dto.ChangeStatusDto;
 import com.bergamascodev.dto.UsuarioDto;
 import com.bergamascodev.entity.Time;
 import com.bergamascodev.entity.Usuario;
-import com.bergamascodev.enums.MensagensErroEnum;
+import com.bergamascodev.enums.MensagemErroEnum;
 import com.bergamascodev.exception.BergamascoException;
 import com.bergamascodev.repository.TimeRepository;
 import com.bergamascodev.repository.UsuarioRepository;
@@ -40,7 +40,7 @@ public class UsuarioService {
             usuarioRepository.saveAndFlush(usuario);
             return usuarioConverter.toDto(usuario);
         } catch (Exception e) {
-            throw gerarUsuarioException(MensagensErroEnum.FALHA_SALVAR_USUARIO);
+            throw gerarUsuarioException(MensagemErroEnum.FALHA_SALVAR_USUARIO);
         }
     }
 
@@ -52,14 +52,14 @@ public class UsuarioService {
             usuarioRepository.saveAndFlush(usuario);
             return usuarioConverter.toDto(usuario);
         } catch (Exception e) {
-            throw gerarUsuarioException(MensagensErroEnum.FALHA_SALVAR_USUARIO);
+            throw gerarUsuarioException(MensagemErroEnum.FALHA_SALVAR_USUARIO);
         }
     }
 
     public UsuarioDto buscarPorId(Long id) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (usuarioOptional.isEmpty()){
-            throw gerarUsuarioException(MensagensErroEnum.USUARIO_NAO_ENCONTRADO, ResponseEnum.REQUISICAO_INVALIDA);
+            throw gerarUsuarioException(MensagemErroEnum.USUARIO_NAO_ENCONTRADO, ResponseEnum.REQUISICAO_INVALIDA);
         }
         return  usuarioConverter.toDtoFromOptionalEntity(usuarioOptional);
     }
@@ -67,10 +67,10 @@ public class UsuarioService {
     public UsuarioDto atualizarStatus(Long id, ChangeStatusDto changeStatusDto) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
         if (id == null || usuarioOptional.isEmpty()) {
-            throw gerarUsuarioException(MensagensErroEnum.REQUISICAO_INVALIDA, ResponseEnum.REQUISICAO_INVALIDA);
+            throw gerarUsuarioException(MensagemErroEnum.REQUISICAO_INVALIDA, ResponseEnum.REQUISICAO_INVALIDA);
         }
         if (changeStatusDto.getStatus() == null) {
-            throw gerarUsuarioException(MensagensErroEnum.STATUS_INVALIDO, ResponseEnum.REQUISICAO_INVALIDA);
+            throw gerarUsuarioException(MensagemErroEnum.STATUS_INVALIDO, ResponseEnum.REQUISICAO_INVALIDA);
         }
         try {
             Usuario usuario = usuarioOptional.get();
@@ -78,14 +78,14 @@ public class UsuarioService {
             usuarioRepository.saveAndFlush(usuario);
             return usuarioConverter.toDto(usuario);
         } catch (Exception e) {
-            throw gerarUsuarioException(MensagensErroEnum.FALHA_SALVAR_STATUS);
+            throw gerarUsuarioException(MensagemErroEnum.FALHA_SALVAR_STATUS);
         }
     }
 
     private Usuario recuperarUsuario(Long id) {
         Usuario usuario = usuarioRepository.getById(id);
         if (usuario == null) {
-            throw gerarUsuarioException(MensagensErroEnum.USUARIO_NAO_ENCONTRADO, ResponseEnum.REQUISICAO_INVALIDA);
+            throw gerarUsuarioException(MensagemErroEnum.USUARIO_NAO_ENCONTRADO, ResponseEnum.REQUISICAO_INVALIDA);
         }
         return usuario;
     }
@@ -100,11 +100,11 @@ public class UsuarioService {
         return usuarioOriginal;
     }
 
-    private BergamascoException gerarUsuarioException(MensagensErroEnum mensagensErroEnum) {
+    private BergamascoException gerarUsuarioException(MensagemErroEnum mensagensErroEnum) {
         return new BergamascoException(mensagensErroEnum.getCodigo(), mensagensErroEnum.getMensagem());
     }
 
-    private BergamascoException gerarUsuarioException(MensagensErroEnum mensagensErroEnum, ResponseEnum responseStatus) {
+    private BergamascoException gerarUsuarioException(MensagemErroEnum mensagensErroEnum, ResponseEnum responseStatus) {
         return new BergamascoException(mensagensErroEnum.getCodigo(), mensagensErroEnum.getMensagem(), responseStatus);
     }
 }

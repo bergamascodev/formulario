@@ -4,7 +4,7 @@ import com.bergamascodev.common.dto.enums.ResponseEnum;
 import com.bergamascodev.dto.PerguntaDto;
 import com.bergamascodev.entity.Categoria;
 import com.bergamascodev.entity.Pergunta;
-import com.bergamascodev.enums.MensagensErroEnum;
+import com.bergamascodev.enums.MensagemErroEnum;
 import com.bergamascodev.exception.BergamascoException;
 import com.bergamascodev.repository.CategoriaRepository;
 import com.bergamascodev.repository.PerguntaRepository;
@@ -39,7 +39,7 @@ public class PerguntaService {
             perguntaRepository.saveAndFlush(pergunta);
             return perguntaConverter.toDto(pergunta);
         } catch (Exception e) {
-            throw gerarPerguntaException(MensagensErroEnum.FALHA_SALVAR_PERGUNTA);
+            throw gerarPerguntaException(MensagemErroEnum.FALHA_SALVAR_PERGUNTA);
         }
     }
 
@@ -51,14 +51,14 @@ public class PerguntaService {
             perguntaRepository.saveAndFlush(pergunta);
             return perguntaConverter.toDto(pergunta);
         } catch (Exception e) {
-            throw gerarPerguntaException(MensagensErroEnum.FALHA_SALVAR_PERGUNTA);
+            throw gerarPerguntaException(MensagemErroEnum.FALHA_SALVAR_PERGUNTA);
         }
     }
 
     public PerguntaDto buscarPorId(Long id) {
         Optional<Pergunta> perguntaOptional = perguntaRepository.findById(id);
         if (perguntaOptional.isEmpty()){
-            throw gerarPerguntaExcpetion(MensagensErroEnum.PERGUNTA_NAO_ENCONTRADA, ResponseEnum.REQUISICAO_INVALIDA);
+            throw gerarPerguntaExcpetion(MensagemErroEnum.PERGUNTA_NAO_ENCONTRADA, ResponseEnum.REQUISICAO_INVALIDA);
         }
         return  perguntaConverter.toDtoFromOptionalEntity(perguntaOptional);
     }
@@ -66,7 +66,7 @@ public class PerguntaService {
     private Pergunta recuperarPergunta(Long id) {
         Pergunta pergunta = perguntaRepository.getById(id);
         if (pergunta == null) {
-            throw gerarPerguntaExcpetion(MensagensErroEnum.PERGUNTA_NAO_ENCONTRADA, ResponseEnum.REQUISICAO_INVALIDA);
+            throw gerarPerguntaExcpetion(MensagemErroEnum.PERGUNTA_NAO_ENCONTRADA, ResponseEnum.REQUISICAO_INVALIDA);
         }
         return pergunta;
     }
@@ -79,11 +79,11 @@ public class PerguntaService {
         return perguntaOriginal;
     }
 
-    private BergamascoException gerarPerguntaException(MensagensErroEnum mensagensErroEnum) {
+    private BergamascoException gerarPerguntaException(MensagemErroEnum mensagensErroEnum) {
         return new BergamascoException(mensagensErroEnum.getCodigo(), mensagensErroEnum.getMensagem());
     }
 
-    private BergamascoException gerarPerguntaExcpetion(MensagensErroEnum mensagensErroEnum, ResponseEnum responseStatus) {
+    private BergamascoException gerarPerguntaExcpetion(MensagemErroEnum mensagensErroEnum, ResponseEnum responseStatus) {
         return new BergamascoException(mensagensErroEnum.getCodigo(), mensagensErroEnum.getMensagem(), responseStatus);
     }
 }

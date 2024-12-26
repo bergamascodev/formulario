@@ -1,11 +1,9 @@
 package com.bergamascodev.enums;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
-public enum MensagensErroEnum {
+public enum MensagemErroEnum {
 
     FALHA_SALVAR_PERGUNTA(1, "Falha ao salvar pergunta"),
     REQUISICAO_INVALIDA(2, "Dados inválidos"),
@@ -26,4 +24,15 @@ public enum MensagensErroEnum {
 
     private Integer codigo;
     private String mensagem;
+
+    MensagemErroEnum(Integer codigo, String mensagem) {
+    }
+
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
 }

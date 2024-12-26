@@ -2,7 +2,7 @@ package com.bergamascodev.service.validator;
 
 import com.bergamascodev.common.dto.enums.ResponseEnum;
 import com.bergamascodev.dto.TimeDto;
-import com.bergamascodev.enums.MensagensErroEnum;
+import com.bergamascodev.enums.MensagemErroEnum;
 import com.bergamascodev.exception.BergamascoException;
 import com.bergamascodev.repository.TimeRepository;
 import com.bergamascodev.service.converter.TimeConverter;
@@ -29,11 +29,11 @@ public class TimeValidator {
 
     public void validarId(TimeDto timeDto) {
         if(timeDto.getId() != null) {
-            throw gerarTimeException(MensagensErroEnum.REQUISICAO_INVALIDA, ResponseEnum.REQUISICAO_INVALIDA);
+            throw gerarTimeException(MensagemErroEnum.REQUISICAO_INVALIDA, ResponseEnum.REQUISICAO_INVALIDA);
         }
     }
 
-    private BergamascoException gerarTimeException(MensagensErroEnum mensagensErroEnum, ResponseEnum responseStatus){
+    private BergamascoException gerarTimeException(MensagemErroEnum mensagensErroEnum, ResponseEnum responseStatus){
         return new BergamascoException(mensagensErroEnum.getCodigo(), mensagensErroEnum.getMensagem(), responseStatus);
     }
 }

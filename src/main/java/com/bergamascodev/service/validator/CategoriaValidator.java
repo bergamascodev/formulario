@@ -2,7 +2,7 @@ package com.bergamascodev.service.validator;
 
 import com.bergamascodev.common.dto.enums.ResponseEnum;
 import com.bergamascodev.dto.CategoriaDto;
-import com.bergamascodev.enums.MensagensErroEnum;
+import com.bergamascodev.enums.MensagemErroEnum;
 import com.bergamascodev.exception.BergamascoException;
 import com.bergamascodev.repository.CategoriaRepository;
 import com.bergamascodev.service.converter.CategoriaConverter;
@@ -29,11 +29,11 @@ public class CategoriaValidator {
 
     public void validarId(CategoriaDto categoriaDto) {
         if (categoriaDto.getId() != null) {
-            throw gerarCategoriaException(MensagensErroEnum.REQUISICAO_INVALIDA, ResponseEnum.REQUISICAO_INVALIDA);
+            throw gerarCategoriaException(MensagemErroEnum.REQUISICAO_INVALIDA, ResponseEnum.REQUISICAO_INVALIDA);
         }
     }
 
-    private BergamascoException gerarCategoriaException(MensagensErroEnum mensagensErroEnum, ResponseEnum responseStatus){
+    private BergamascoException gerarCategoriaException(MensagemErroEnum mensagensErroEnum, ResponseEnum responseStatus){
         return new BergamascoException(mensagensErroEnum.getCodigo(), mensagensErroEnum.getMensagem(), responseStatus);
     }
 }

@@ -3,6 +3,7 @@ package com.bergamascodev.service.converter;
 import com.bergamascodev.common.Converter;
 import com.bergamascodev.dto.CategoriaDto;
 import com.bergamascodev.entity.Categoria;
+import lombok.Builder;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
+@Builder
 public class CategoriaConverter implements Converter<Categoria, CategoriaDto> {
 
     @Override

@@ -4,7 +4,7 @@ import com.bergamascodev.common.Converter;
 import com.bergamascodev.dto.PerguntaDto;
 import com.bergamascodev.entity.Categoria;
 import com.bergamascodev.entity.Pergunta;
-import com.bergamascodev.enums.MensagensErroEnum;
+import com.bergamascodev.enums.MensagemErroEnum;
 import com.bergamascodev.exception.BergamascoException;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -54,7 +54,7 @@ public class PerguntaConverter implements Converter<Pergunta, PerguntaDto> {
 
     private Categoria getCategoria(PerguntaDto perguntaDto) {
         if(perguntaDto.getCategoriaId() == null) {
-            throw new BergamascoException(MensagensErroEnum.PERGUNTA_INVALIDA.getCodigo(), MensagensErroEnum.PERGUNTA_INVALIDA.getMensagem());
+            throw new BergamascoException(MensagemErroEnum.PERGUNTA_INVALIDA.getCodigo(), MensagemErroEnum.PERGUNTA_INVALIDA.getMensagem());
         }
         return Categoria.builder().id(perguntaDto.getCategoriaId()).build();
     }
